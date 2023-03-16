@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+struct date{
+    int day;
+    int month;
+    int year;
+};
+typedef struct date Date;
+
+int raz(Date date1,Date date2)
+{
+    if(date1.year>date2.year)
+    {
+        return 1;
+    }
+    else if(date1.year<date2.year)
+    {
+        return -1;
+    }
+    if(date1.month>date2.month)
+    {
+        return 1;
+    }
+    else if(date1.month<date2.month)
+    {
+        return -1;
+    }
+    if(date1.day>date2.day)
+    {
+        return 1;
+    }
+    else if(date1.day<date2.day)
+    {
+        return -1;
+    }
+    else return 0;
+}
+
+void convert(Date date1,Date date2)
+{
+    int razlika1,razlika2;
+    razlika1=date1.day+(date1.month*30)+(date1.year*365);
+    razlika2=date2.day+(date2.month*30)+(date2.year*365);
+
+    printf("Razlikata pomegju dvata datumi vo denovi e %d", razlika1-razlika2);
+}
+
+int main() {
+    Date date1;
+    Date date2;
+
+    scanf("%d.%d.%d",&date1.day,&date1.month,&date1.year); //Koga vnesuvas godina vnesuvas primer 24.09.2003
+    scanf("%d.%d.%d",&date2.day,&date2.month,&date2.year);
+
+    int razlika;
+    razlika=raz(date1,date2);
+
+    if(razlika==0)
+    {
+        printf("Datumite se isti.");
+        return 0;
+    }
+    else if(razlika==1)
+    {
+        convert(date1,date2);
+    }
+    else //if razlika==-1
+    {
+        convert(date2,date1);
+    }
+    return 1;
+}
